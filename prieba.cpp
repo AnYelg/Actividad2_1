@@ -85,49 +85,63 @@ class LinkedList{
         }
 
 		void insert(int pos, Nodo<T> *nuevo){
-		if(head==NULL){
-				append(nuevo);
-				return;
-		}
-		if (pos==0){
-			nuevo->next=head;
-			head->prev=nuevo;
-			head=nuevo;
-			return;
-		}
-		int p=0;
-		Nodo<T> *it=head;
-		while(it->next!=NULL && p<pos){
-			it=it->next;
-			p++;
-		}
-		if(p==pos){
-			it->prev->next=nuevo;
-			nuevo->prev=it->prev;
-			it->prev=nuevo;
-			nuevo->next=it;
-		}
-		if((p+1)==pos){
-			append(nuevo);
-		}
+            if(head==NULL){
+                    append(nuevo);
+                    return;
+            }
+            if (pos==0){
+                nuevo->next=head;
+                head->prev=nuevo;
+                head=nuevo;
+                return;
+            }
+            int p=0;
+            Nodo<T> *it=head;
+            while(it->next!=NULL && p<pos){
+                it=it->next;
+                p++;
+            }
+            if(p==pos){
+                it->prev->next=nuevo;
+                nuevo->prev=it->prev;
+                it->prev=nuevo;
+                nuevo->next=it;
+            }
+            if((p+1)==pos){
+                append(nuevo);
+            }
 		
-	}
+	    }
     
-    void DeleteList(){
-        Nodo<T> *it=head;
-        Nodo<T> *temp=head;
-        if(it==NULL){
-            return;
-        }
-        while(it->next!=NULL){
-            Nodo<T> *temp=it->next;
-            it->next=temp->next;
+        void DeleteList(){
+            Nodo<T> *it=head;
+            Nodo<T> *temp=head;
+            if(it==NULL){
+                return;
+            }
+            while(it->next!=NULL){
+                Nodo<T> *temp=it->next;
+                it->next=temp->next;
+                delete temp;
+            }
+
+            it=it->next;
             delete temp;
         }
 
-        it=it->next;
-        delete temp;
-    }
+        void RemoveDuplicates(){
+            Nodo<T> *it=head;
+            while (it!=NULL){
+                
+                if(it->value == it->next->value){
+                    Nodo<T> *temp=it->next;
+                    it->next=temp->next;
+                    delete temp;
+                }
+
+                it = it->next;
+            }
+        }
 
 
     
@@ -158,7 +172,7 @@ int main(){
     pos.posicion();
     pos.imprimir();*/
 
-    LinkedList<int> ll;
+    /*LinkedList<int> ll;
 	ll.append(8);
 	ll.append(4);
 	ll.append(6);
@@ -169,6 +183,19 @@ int main(){
     ll.append(5);
     ll.imprimir();
     ll.DeleteList(); // Saca un 0 de la nada 
+    ll.imprimir();*/
+    LinkedList<int> ll;
+	ll.append(8);
+	ll.append(4);
+	ll.append(6);
+	ll.append(4);
+	ll.append(11);
+    ll.append(5);
+	ll.append(15);
+    ll.append(71);
     ll.imprimir();
+    ll.RemoveDuplicates();
+    ll.imprimir();
+
 	return 0;
 }
