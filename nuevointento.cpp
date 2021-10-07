@@ -103,6 +103,30 @@ class LinkedList{
 
         }
 
+        void SortedInsert (T value){
+            Nodo<T>* nuevo=new Nodo<T>(value);
+            if(root==NULL){
+				return;
+			}
+
+            int pos = 0;
+            int actual=0;
+            Nodo<T> *it=root;
+            while(it->value > it->next->value){
+                it=it->next;
+                pos++;
+            }
+            while(it!=NULL && actual<pos-1){
+				it=it->next;
+				actual++;
+			}
+			if(actual==pos-1){
+				nuevo->next=it->next;
+				it->next=nuevo;
+			}
+
+        }
+
         void insert(int pos, Nodo<T> *nuevo){
 			if(root==NULL){
 				return;
@@ -127,7 +151,7 @@ class LinkedList{
 
 int main(){
 	LinkedList<int> ll;
-	ll.append(5);
+	/*ll.append(5);
 	ll.append(5);
 	ll.append(6);
 	ll.append(4);
@@ -139,6 +163,11 @@ int main(){
     //ll.DeleteList();
     //ll.imprimir();
     ll.RemoveDuplicates();
+    ll.imprimir();*/
+    ll.append(1);
+    ll.append(2);
+    ll.append(4);
+    ll.SortedInsert(3);
     ll.imprimir();
 	
 	
