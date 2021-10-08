@@ -109,19 +109,18 @@ class LinkedList{
 
         void SortedInsert (T value){
             Nodo<T>* nuevo=new Nodo<T>(value);
-            if(root==NULL){
+            if(root==NULL){ //insertar
 				return;
 			}
 
             int pos = 0;
             int actual=0;
             Nodo<T> *it=root;
-            while(it->value > it->next->value){
-
-                
+            while(it->value > it->next->value){ //poner otro while
                 it=it->next;
                 pos++;
             }
+
             while(it!=NULL && actual<pos-1){
 				it=it->next;
 				actual++;
@@ -161,6 +160,29 @@ class LinkedList{
 				return;
 			}
 
+            if(root->value == root->next->value){
+                Nodo<T> *temp=root;
+				root=root->next;
+				delete temp;
+				return; 
+            }
+            
+            while(it->next != NULL){
+                
+                if (it ->value == it ->next->value){ 
+                    Nodo <T> *temp = it;
+                    it = it ->next;
+                    delete temp;
+                    return;                    
+                }
+                it = it->next;
+			}
+            
+			/*
+			
+			
+            
+
 			while(it->next != NULL){
 				while(it != NULL){
 					if(it == it->next){
@@ -174,9 +196,8 @@ class LinkedList{
 						temp = temp->next;
 					}
 				}
-			}
-
-			root = root->next;
+			}*/
+			//root = root->next;
 		}
 
 
