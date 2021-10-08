@@ -143,6 +143,31 @@ class LinkedList{
             }
         }
 
+        void EliminarDuplicados(){
+            Nodo <T> *it=root;
+			Nodo <T> *temp=root->next;
+			if(root == NULL){
+				return;
+			}
+
+			while(it->next != NULL){
+				while(it != NULL){
+					if(it->value == it->next){
+						it->next = temp->next;
+						delete temp;
+						temp=it->next;
+					}
+
+					else{
+						it = temp;
+						temp = temp->next;
+					}
+				}
+			}
+
+			root = root->next;
+		}
+
 
     
 };
@@ -184,6 +209,7 @@ int main(){
     ll.imprimir();
     ll.DeleteList(); // Saca un 0 de la nada 
     ll.imprimir();*/
+    
     LinkedList<int> ll;
 	ll.append(8);
 	ll.append(4);
@@ -194,7 +220,7 @@ int main(){
 	ll.append(15);
     ll.append(71);
     ll.imprimir();
-    ll.RemoveDuplicates();
+    ll.EliminarDuplicados();
     ll.imprimir();
 
 	return 0;

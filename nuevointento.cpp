@@ -13,6 +13,7 @@ class Nodo{
 		next = NULL;
 	}
 };
+
 template <class T>
 class LinkedList{
 	public:
@@ -33,7 +34,8 @@ class LinkedList{
 				it->next=nuevo;
 			}
 		}
-        void append(T val){
+        
+		void append(T val){
 			Nodo<T> *nuevo=new Nodo<T>(val);
 			this->append(nuevo);
 		}
@@ -60,7 +62,8 @@ class LinkedList{
 			}
             cout<<"Tu número buscado: " <<i << " se encuentra: " << veces <<" veces en la lista" << endl;
 		}
-        void DeleteList(){
+        
+		void DeleteList(){
             Nodo<T> *temp=root;
             Nodo<T> *it=root;
 
@@ -78,7 +81,8 @@ class LinkedList{
 			delete temp;
 			return;
 		}
-        void RemoveDuplicates(){ 
+        
+		/*void RemoveDuplicates(){ 
             if(root==NULL){
 				return;
 			}
@@ -101,7 +105,7 @@ class LinkedList{
 				delete temp;
 			}
 
-        }
+        }*/
 
         void SortedInsert (T value){
             Nodo<T>* nuevo=new Nodo<T>(value);
@@ -135,11 +139,11 @@ class LinkedList{
 			}
 			int actual=0;
 			Nodo<T> *it=root;
-			if(pos==0){
+			/*if(pos==0){
 				nuevo->next=root;
 				root=nuevo;
 				return;
-			}
+			}*/
 			while(it!=NULL && actual<pos-1){
 				it=it->next;
 				actual++;
@@ -149,11 +153,38 @@ class LinkedList{
 				it->next=nuevo;
 			}
 		}
+
+		 void removeDuplicates(){
+            Nodo <T> *it=root;
+			Nodo <T> *temp=root;
+			if(root == NULL){
+				return;
+			}
+
+			while(it->next != NULL){
+				while(it != NULL){
+					if(it == it->next){
+						it->next = temp->next;
+						delete temp;
+						temp=it->next;
+					}
+
+					else{
+						it = temp;
+						temp = temp->next;
+					}
+				}
+			}
+
+			root = root->next;
+		}
+
+
 };
 
 int main(){
 	LinkedList<int> ll;
-	/*ll.append(5);
+	ll.append(5);
 	ll.append(5);
 	ll.append(6);
 	ll.append(4);
@@ -161,16 +192,16 @@ int main(){
     ll.append(4);
 	ll.append(15);
 	ll.imprimir();
-	ll.Count(5);
+	//ll.Count(5);
     //ll.DeleteList();
     //ll.imprimir();
-    ll.RemoveDuplicates();
-    ll.imprimir();*/
-    ll.append(1);
+    ll.removeDuplicates();
+    ll.imprimir();
+    /*ll.append(1);
     ll.append(2);
     ll.append(4);
     ll.SortedInsert(3);
-    ll.imprimir();
+    ll.imprimir();*/
 	
 	
 	return 0;
