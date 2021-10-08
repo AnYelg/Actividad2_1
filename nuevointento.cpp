@@ -113,6 +113,8 @@ class LinkedList{
             int actual=0;
             Nodo<T> *it=root;
             while(it->value > it->next->value){
+
+                
                 it=it->next;
                 pos++;
             }
