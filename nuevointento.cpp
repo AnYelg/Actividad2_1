@@ -108,31 +108,24 @@ class LinkedList{
         }*/
 
         void SortedInsert (T value){
-            Nodo<T>* nuevo=new Nodo<T>(value);
-            if(root==NULL){ //insertar
-				return;
+			Nodo <T> *nuevo = new Nodo <T>(value);
+			Nodo <T> *it = root;
+
+			while(nuevo->value > it->value && it->next != NULL){
+				it = it->next;
 			}
 
-            int pos = 0;
-            int actual=0;
-            Nodo<T> *it=root;
-            while(it->value > it->next->value){ //poner otro while
-                it=it->next;
-                pos++;
-            }
-
-            while(it!=NULL && actual<pos-1){
-				it=it->next;
-				actual++;
-			}
-			if(actual==pos-1){
-				nuevo->next=it->next;
-				it->next=nuevo;
+			if(nuevo->value <= it->value){
+				nuevo->next = it->next;
+				it->next = nuevo;
 			}
 
+			if(it->value < nuevo->value){
+				it->next = value;
+			}
         }
 
-        void insert(int pos, Nodo<T> *nuevo){
+        /*void insert(int pos, Nodo<T> *nuevo){
 			if(root==NULL){
 				return;
 			}
@@ -142,7 +135,7 @@ class LinkedList{
 				nuevo->next=root;
 				root=nuevo;
 				return;
-			}*/
+			}
 			while(it!=NULL && actual<pos-1){
 				it=it->next;
 				actual++;
@@ -151,7 +144,7 @@ class LinkedList{
 				nuevo->next=it->next;
 				it->next=nuevo;
 			}
-		}
+		}*/
 
 		 void removeDuplicates(){
             Nodo <T> *it=root;
@@ -207,11 +200,11 @@ int main(){
 	LinkedList<int> ll;
 	ll.append(5);
 	ll.append(5);
-	ll.append(6);
-	ll.append(4);
-	ll.append(11);
-    ll.append(4);
-	ll.append(15);
+	ll.append(5);
+	ll.append(7);
+	ll.append(8);
+    ll.append(9);
+	ll.append(10);
 	ll.imprimir();
 	//ll.Count(5);
     //ll.DeleteList();
@@ -221,9 +214,5 @@ int main(){
     /*ll.append(1);
     ll.append(2);
     ll.append(4);
-    ll.SortedInsert(3);
-    ll.imprimir();*/
-	
-	
-	return 0;
+	return 0;*/
 }
