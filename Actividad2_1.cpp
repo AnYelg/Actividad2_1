@@ -1,5 +1,7 @@
 //Andrea Yela González A01025250
 //Joshua Ruben Amaya Camilo A01025250
+//Comentarios: Reverse fue basado de un blog en internet. https://www.studytonight.com/post/program-to-reverse-a-linked-list-in-cpp
+
 #include <iostream>
 
 using namespace std;
@@ -62,11 +64,10 @@ class LinkedList{
                 
                 it=it->next;
 			}
-            cout<<"Tu número buscado: " <<i << " se encuentra: " << veces <<" veces en la lista" << endl;
+            cout<<"Tu número buscado: " <<i << " se encuentra " << veces <<" veces en la lista" << endl;
 		}
         
 		void DeleteList(){
-            Nodo<T> *temp=root;
             Nodo<T> *it=root;
 
 			if(root==NULL){
@@ -74,13 +75,12 @@ class LinkedList{
 			}
 
 			while(it->next!=NULL){
-                Nodo<T> *temp=it->next;
-				it->next=temp->next;
+                Nodo<T> *temp = it->next;
+				it->next = temp->next;
 				delete temp;
 			}
             
 			root=root->next;
-			delete temp;
 			return;
 		}
         
@@ -153,19 +153,43 @@ class LinkedList{
 		}*/
 
 		 void removeDuplicates(){
-            Nodo <T> *it=root;
-			Nodo <T> *temp=root;
+            Nodo <T> *it = root;
+			Nodo <T> *temp = NULL;
+			Nodo <T> *duplicado = NULL;
+			int prub = 0;
+
 			if(root == NULL){
 				return;
 			}
+			
+			if(root->value == root->next->value){
+                temp = root;
+				root = root->next;
+				delete temp;
+				return;
+            }
 
-            if(root->value == root->next->value){
+			while(it->next != NULL){
+				if(it->value == it->next->value){
+					temp = it;
+					it = it->next;
+					delete temp;
+					return;
+				}
+				it = it->next;
+			}
+			
+
+			
+			
+            /*
+
+			 if(root->value == root->next->value){
                 Nodo<T> *temp=root;
 				root=root->next;
 				delete temp;
-				return; 
-            }
-            
+				return;
+            	}
             while(it->next != NULL){
                 
                 if (it ->value == it ->next->value){ 
@@ -175,7 +199,7 @@ class LinkedList{
                     return;                    
                 }
                 it = it->next;
-			}
+			}*/
             
 			/*
 			
@@ -197,6 +221,27 @@ class LinkedList{
 				}
 			}*/
 			//root = root->next;
+		}
+
+
+		void  Reverse(){
+
+			if(root==NULL){
+				return;
+			}
+
+			Nodo<T> *it = root;
+			Nodo<T> *temp = NULL;
+			Nodo <T> *prev = NULL;
+
+			while (it != NULL){
+				temp = it->next;
+				it->next= prev;
+				prev = it;
+				it = temp;
+			}
+			root = prev;
+			
 		}
 
 
@@ -224,11 +269,14 @@ int main(){
 	ll.append(10);
     ll.removeDuplicates();
     ll.imprimir();
+	
 
-	ll.SortedInsert(6);
-	ll.imprimir();
+	//ll.SortedInsert(6);
+	//ll.imprimir();
     /*ll.append(1);
     ll.append(2);
     ll.append(4);
+	ll.Reverse();
+	ll.imprimir();
 	return 0;*/
 }
