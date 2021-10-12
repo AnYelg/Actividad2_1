@@ -110,8 +110,12 @@ class LinkedList{
         }*/
 
         void SortedInsert (T value){
-			Nodo <T> *nuevo = new Nodo <T>(value);
+			Nodo<T> *nuevo=new Nodo<T>(value);
 			Nodo <T> *it = root;
+
+			if(root==NULL){
+				return;
+			}
 
 			while(nuevo->value > it->value && it->next != NULL){
 				it = it->next;
