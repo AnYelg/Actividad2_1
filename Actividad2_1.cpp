@@ -83,144 +83,39 @@ class LinkedList{
 			root=root->next;
 			return;
 		}
-        
-		/*void RemoveDuplicates(){ 
-            if(root==NULL){
-				return;
-			}
-
-            if(root->value == root->next->value){
-                Nodo<T> *temp=root;
-				root=root->next;
-				delete temp;
-				return;
-            }
-            Nodo<T> *it=root;
-
-            while (it->next!=NULL && it->next->value != it->value){    
-                it=it->next;
-            }
-
-            if(it->next!=NULL){
-                Nodo<T> *temp=it;
-				it = temp->next;
-				delete temp;
-			}
-
-        }*/
 
         void SortedInsert (T value){
-			Nodo<T> *nuevo=new Nodo<T>(value);
-			Nodo <T> *it = root;
-
 			if(root==NULL){
 				return;
 			}
 
-			while(nuevo->value > it->value && it->next != NULL){
+			Nodo<T> *it = root;
+			Nodo<T> *nuev = new Nodo<T>(value);
+			
+			while(it->next->value < nuev->value){
 				it = it->next;
 			}
 
-			if(nuevo->value <= it->value){
-				nuevo->next = it->next;
-				it->next = nuevo;
-			}
-
-			if(it->value < nuevo->value){
-				it->next = value;
-			}
+			nuev->next = it->next;
+			it ->next = nuev;
+		
         }
-
-        /*void insert(int pos, Nodo<T> *nuevo){
-			if(root==NULL){
-				return;
-			}
-			int actual=0;
-			Nodo<T> *it=root;
-			/*if(pos==0){
-				nuevo->next=root;
-				root=nuevo;
-				return;
-			}
-			while(it!=NULL && actual<pos-1){
-				it=it->next;
-				actual++;
-			}
-			if(actual==pos-1){
-				nuevo->next=it->next;
-				it->next=nuevo;
-			}
-		}*/
 
 		 void removeDuplicates(){
             Nodo <T> *it = root;
 			Nodo <T> *temp = NULL;
-			Nodo <T> *duplicado = NULL;
-			int prub = 0;
 
 			if(root == NULL){
 				return;
 			}
 			
-			if(root->value == root->next->value){
-                temp = root;
-				root = root->next;
-				delete temp;
-				return;
-            }
-
-			while(it->next != NULL){
-				if(it->value == it->next->value){
-					temp = it;
-					it = it->next;
+				while (it->value == it->next->value){
+					temp = it->next;
+					it->next = temp->next;
 					delete temp;
-					return;
 				}
 				it = it->next;
-			}
 			
-
-			
-			
-            /*
-
-			 if(root->value == root->next->value){
-                Nodo<T> *temp=root;
-				root=root->next;
-				delete temp;
-				return;
-            	}
-            while(it->next != NULL){
-                
-                if (it ->value == it ->next->value){ 
-                    Nodo <T> *temp = it;
-                    it = it ->next;
-                    delete temp;
-                    return;                    
-                }
-                it = it->next;
-			}*/
-            
-			/*
-			
-			
-            
-
-			while(it->next != NULL){
-				while(it != NULL){
-					if(it == it->next){
-						it->next = temp->next;
-						delete temp;
-						temp=it->next;
-					}
-
-					else{
-						it = temp;
-						temp = temp->next;
-					}
-				}
-			}*/
-			//root = root->next;
 		}
 
 
@@ -256,10 +151,13 @@ int main(){
 	ll.append(8);
     ll.append(9);
 	ll.append(10);
+	cout << "Nuestra linked list: " << endl;
 	ll.imprimir();
 	ll.Count(5);
     ll.DeleteList();
-    ll.imprimir();
+    cout << "Lista borrada: "<< endl;
+	ll.imprimir();
+	cout << "Nueva lista ordenada: " << endl;
 	ll.append(5);
 	ll.append(5);
 	ll.append(5);
@@ -267,16 +165,18 @@ int main(){
 	ll.append(8);
     ll.append(9);
 	ll.append(10);
+	ll.imprimir();
+	cout << "Remover duplicados: "<< endl;
     ll.removeDuplicates();
-    ll.imprimir();
-	
-
-	//ll.SortedInsert(6);
-	//ll.imprimir();
-    /*ll.append(1);
-    ll.append(2);
-    ll.append(4);
+	ll.imprimir();
+	cout << "Insertar un número en el orden creciente: "<< endl;
+	int numeroinsertado;
+	cout << "Ponga un número: "; cin >> numeroinsertado;
+	ll.SortedInsert(numeroinsertado);
+	ll.imprimir();
+	cout << "Lista en reversa: "<< endl;
 	ll.Reverse();
 	ll.imprimir();
-	return 0;*/
+	
+    
 }
