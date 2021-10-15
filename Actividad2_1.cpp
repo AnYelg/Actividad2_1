@@ -109,12 +109,12 @@ class LinkedList{
 				return;
 			}
 			
-				while (it->value == it->next->value){
-					temp = it->next;
-					it->next = temp->next;
-					delete temp;
-				}
-				it = it->next;
+			while (it->value == it->next->value){
+				temp = it->next;
+				it->next = temp->next;
+				delete temp;
+			}
+			it = it->next;
 			
 		}
 
